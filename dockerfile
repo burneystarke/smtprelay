@@ -9,5 +9,6 @@ RUN go build -ldflags="-extldflags -static -s -w" -o smtprelay
 RUN chmod 555 smtprelay
 FROM gcr.io/distroless/static-debian12
 COPY --from=build /src/smtprelay /smtprelay
+USER nonroot:nonroot
 ENTRYPOINT ["/smtprelay"]
 CMD ["--help"]
